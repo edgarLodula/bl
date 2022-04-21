@@ -20,7 +20,10 @@ class CannonBall {
 
   }
   Forc(){
+    var newAngle = cannon.angle -28
+    newAngle = radians(newAngle);
+    var velocity = p5.Vector.fromAngle(newAngle); //the desired angle, in radians
     Matter.Body.setStatic(this.body,false)
-    Matter.Body.setVelocity(this.body,{x:50,y:-10})
+    Matter.Body.setVelocity(this.body,{x:velocity.x *(180/3.14), y: velocity.y * (180/3.14)})
   }
 }
