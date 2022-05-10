@@ -7,6 +7,7 @@ var engine, world, backgroundImg;
 var canvas, angle, tower, ground, cannon;
 var cannonBall;
 var balls=[]
+var boates=[]
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
@@ -41,7 +42,7 @@ function draw() {
   imageMode(CENTER);
   image(towerImage, tower.position.x, tower.position.y, 160, 310);
   pop();
-
+createboates()
   cannon.display();
   for(var i=0; i<balls.length;i++){
     showBalls(balls[i])
@@ -65,5 +66,22 @@ function keyPressed(){
   if(keyCode===DOWN_ARROW){
     var cannonBall= new CannonBall(cannon.x,cannon.y)
     balls.push(cannonBall)
+  }
+}
+
+function createboates(){
+  if(boates.length >0){
+for(var i=0;i<boates.length;i++){
+  Matter.Body.setVelocity(boates[i].body,{x:-0.9,y:0})
+  boates[i].display()
+}
+if(boates[boates.length-1].body.position.x <900){
+  var boate= new Boat (width,height-60,170,170,-60)
+    boates.push(boate)
+}
+  }
+  else{
+    var boate= new Boat (width,height-60,170,170,-60)
+    boates.push(boate)
   }
 }
