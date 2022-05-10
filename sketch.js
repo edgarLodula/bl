@@ -20,7 +20,6 @@ function setup() {
   angleMode(DEGREES)
   angle = 20
 
-
   ground = Bodies.rectangle(0, height - 1, width * 2, 1, { isStatic: true });
   World.add(world, ground);
 
@@ -28,7 +27,7 @@ function setup() {
   World.add(world, tower);
 
   cannon = new Cannon(180, 110, 130, 100, angle);
- // cannonBall = new CannonBall(cannon.x, cannon.y);
+
 }
 
 function draw() {
@@ -46,24 +45,25 @@ function draw() {
   cannon.display();
   for(var i=0; i<balls.length;i++){
     showBalls(balls[i])
-    
   }
-  //cannonBall.display();
+ 
 }
+
 function showBalls(ball){
   if(ball){
     ball.display()
   }
 }
+
 function keyReleased(){
   if(keyCode===DOWN_ARROW){
     balls[balls.length-1].Forc();
   }
 }
+
 function keyPressed(){
   if(keyCode===DOWN_ARROW){
     var cannonBall= new CannonBall(cannon.x,cannon.y)
     balls.push(cannonBall)
-    
   }
 }
