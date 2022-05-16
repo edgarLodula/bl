@@ -28,7 +28,6 @@ function setup() {
   World.add(world, tower);
 
   cannon = new Cannon(180, 110, 130, 100, angle);
-
 }
 
 function draw() {
@@ -42,10 +41,13 @@ function draw() {
   imageMode(CENTER);
   image(towerImage, tower.position.x, tower.position.y, 160, 310);
   pop();
-createboates()
+
+  createboates();
   cannon.display();
+
   for(var i=0; i<balls.length;i++){
     showBalls(balls[i])
+    
   }
  
 }
@@ -71,14 +73,19 @@ function keyPressed(){
 
 function createboates(){
   if(boates.length >0){
-for(var i=0;i<boates.length;i++){
-  Matter.Body.setVelocity(boates[i].body,{x:-0.9,y:0})
-  boates[i].display()
-}
-if(boates[boates.length-1].body.position.x <900){
-  var boate= new Boat (width,height-60,170,170,-60)
-    boates.push(boate)
-}
+    for(var i=0;i<boates.length;i++){
+      if (boates[i]) {
+        Matter.Body.setVelocity(boates[i].body,{x:-0.9,y:0})
+        boates[i].display()
+      }
+    }
+    if(boates[boates.length - 1] === undefined || boates[boates.length-1].body.position.x <900){
+      var positions = [-40, -60, -70, -20];
+      var position = random(positions);
+      
+      var boate= new Boat (width,height-60,170,170,position)
+        boates.push(boate)
+    }
   }
   else{
     var boate= new Boat (width,height-60,170,170,-60)
