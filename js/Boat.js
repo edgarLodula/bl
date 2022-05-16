@@ -9,7 +9,13 @@ class Boat {
       this.boatPosition = boatPos;
       World.add(world, this.body);
     }
-  
+  remove(i){
+    setTimeout(() => {
+      Matter.World.remove(world,boates[i].body)
+      delete boates[i]
+    }, 2000);
+  }
+
     display() {
       var angle = this.body.angle;
       var pos = this.body.position;

@@ -47,7 +47,7 @@ function draw() {
 
   for(var i=0; i<balls.length;i++){
     showBalls(balls[i])
-    
+    colision(i)
   }
  
 }
@@ -91,4 +91,18 @@ function createboates(){
     var boate= new Boat (width,height-60,170,170,-60)
     boates.push(boate)
   }
+}
+function colision(index){
+for(var i=0; i<boates.length;i++){
+  if(balls[index]!==undefined && boates[i]!==undefined){
+    var impact=Matter.SAT.collides(balls[index].body, boates[i].body)
+    if(impact.collided){
+      Matter.World.remove(world,balls[index].body)
+      delete balls[index]
+     // Matter.World.remove(world,boates[i].body)
+      //delete boates[i]
+      boates[i].remove(i)
+    }
+  }
+}
 }
