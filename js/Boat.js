@@ -15,6 +15,9 @@ class Boat {
     }
   
   remove(i){
+    this.animation=boatBroken
+    this.width=300
+    this.height=300
     setTimeout(() => {
       Matter.World.remove(world,boates[i].body)
       delete boates[i]

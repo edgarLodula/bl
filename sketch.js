@@ -11,6 +11,8 @@ var boates=[]
 
 var boatAnimation = [];
 var boatSpriteData, boatSpriteSheet;
+var boatBroken = [];
+var boatSpriteDataB, boatSpriteSheetB;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
@@ -18,6 +20,9 @@ function preload() {
 
   boatSpriteData =  loadJSON ("assets/boat/boat.json");
   boatSpriteSheet = loadImage ("assets/boat/boat.png")
+
+  boatSpriteDataB = loadJSON ("assets/boat/brokenBoat.json")
+  boatSpriteSheetB = loadImage ("assets/boat/brokenBoat.png")
 }
 
 function setup() {
@@ -40,6 +45,12 @@ function setup() {
     var pos = boatFrames[i].position;
     var img = boatSpriteSheet.get(pos.x, pos.y, pos.w, pos.h);
     boatAnimation.push (img);
+  }
+  var boatBrokenF = boatSpriteDataB.frames;
+  for(var i=0;i<boatBrokenF.lenght;i++){
+    var pos = boatBrokenF[i].position;
+    var img = boatSpriteSheetB.get(pos.x, pos.y, pos.w, pos.h);
+    boatBroken.push (img);
   }
 }
 
@@ -91,6 +102,8 @@ function createboates(){
         Matter.Body.setVelocity(boates[i].body,{x:-0.9,y:0})
         boates[i].display()
         boates[i].animate();
+      }else{
+        boates[i]
       }
     }
     if(boates[boates.length - 1] === undefined || boates[boates.length-1].body.position.x <900){
