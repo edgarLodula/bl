@@ -86,7 +86,11 @@ function draw() {
   image(backgroundImg, 0, 0, width, height);
 
   Engine.update(engine);
-
+  
+  if(!backgroundMusic.isPlaying()){
+    backgroundMusic.play()
+    backgroundMusic.setVolume(0.2)
+  }
   rect(ground.position.x, ground.position.y, width * 2, 1);
   push();
   imageMode(CENTER);
@@ -100,7 +104,9 @@ function draw() {
     showBalls(balls[i],i)
     colision(i)
   }
- 
+  textSize(30)
+  fill("black")
+  text("pontuação: "+ score,950,50)
 }
 
 function showBalls(ball, index){
@@ -110,6 +116,7 @@ function showBalls(ball, index){
     if (ball.body.position.x >= width || ball.body.position.y >= height - 50) {
       if (!ball.isSink){
         ball.remove(index);
+        waterSound.play()
       } 
     }
   }
@@ -118,6 +125,8 @@ function showBalls(ball, index){
 function keyReleased(){
   if(keyCode===DOWN_ARROW){
     balls[balls.length-1].Forc();
+    cannonExplosion.play()
+
   }
 }
 
@@ -144,6 +153,9 @@ function createboates(){
        if (collision.collided  && ! boates[i].isBroken){
         isGameOver = true;
           gameOver();
+          if(!pirateLaughSound.isPlaying()){
+            pirateLaughSound.play()
+          }
        }
 
       }else{
@@ -171,7 +183,7 @@ for(var i=0; i<boates.length;i++){
     var impact=Matter.SAT.collides(balls[index].body, boates[i].body)
     if(impact.collided){
       boates[i].remove(i)
-
+       
       Matter.World.remove(world,balls[index].body)
       delete balls[index]
      // Matter.World.remove(world,boates[i].body)

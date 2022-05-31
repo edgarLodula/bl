@@ -23,6 +23,7 @@ class Boat {
     setTimeout(() => {
       Matter.World.remove(world,boates[i].body)
       delete boates[i]
+      score+=1
     }, 2000);
   }
 
